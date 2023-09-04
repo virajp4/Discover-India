@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spots</title>
+</head>
+<body>
+    <h1>All Spots</h1>
+    <a href="/spots/new">Add spot</a>
+    <ul>
+        <% for(let spot of spots) { %>
+            <li><a href="/spots/<%= spot._id %>"><%= spot.title %></a></li>
+        <% } %> 
+    </ul>
+</body>
+</html>
