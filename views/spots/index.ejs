@@ -1,17 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Spots</title>
-</head>
-<body>
+<% layout('layouts/boilerplate') %>
+
     <h1>All Spots</h1>
     <a href="/spots/new">Add spot</a>
-    <ul>
-        <% for(let spot of spots) { %>
-            <li><a href="/spots/<%= spot._id %>"><%= spot.title %></a></li>
-        <% } %> 
-    </ul>
-</body>
-</html>
+
+    <% for(let spot of spots) { %>
+        <div class="card mb-3">
+            <div class="row">
+                <div class="col-md-4">
+                    <img class="img-fluid" src="<%=spot.image%>" alt="">
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h3 class="card-title"> <%= spot.title %> </h3>
+                        <p class="card-text"> <%= spot.description %> </p>
+                        <h6 class="card-text"> <%= spot.location %> </h6>
+                        <a class="btn btn-primary" href="/spots/<%= spot._id %>"> View </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <% } %>

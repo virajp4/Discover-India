@@ -1,26 +1,20 @@
-<!DOCTYPE html>
-<html lang="en">
+<% layout('layouts/boilerplate') %>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Show Spot</title>
-</head>
-
-<body>
-    <h1>
-        <%= spot.title %>
-    </h1>
-    <h2>
-        <%= spot.location %>
-    </h2>
-    <footer>
-        <a href="/spots/<%= spot._id %>/edit">Edit</a>
-        <form action="/spots/<%= spot._id %>?_method=delete" method="post">
-            <button type="submit">Delete</button>
-        </form>
-        <a href="/spots">Back to main</a>
-    </footer>
-</body>
-
-</html>
+    <div class="row">
+        <div class="col-6 offset-3">
+            <div class="card">
+                <img src="<%= spot.image %>">
+                <div class="card-body">
+                    <h5 class="card-title"><%= spot.title %></h5>
+                    <p class="card-text"><%= spot.description %></p>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item text-muted"><%= spot.location %></li>
+                    <li class="list-group-item"><%= spot.price %></li>
+                </ul>
+                <div class="card-body">
+                    <a href="/spots/<%= spot._id %>" class="card-link btn btn-infor"></a>
+                </div>
+            </div>
+        </div>
+    </div>

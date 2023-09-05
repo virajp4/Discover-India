@@ -1,18 +1,35 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Create New</title>
-</head>
-<body>
-    <form action="/spots" method="post">
-        <label for="title">Title</label>
-        <input type="text" name="spot[title]" id="title">
-        <label for="location">Location</label>
-        <input type="text" name="spot[location]" id="location">
-        <button type="submit">Create</button>
-    </form>
-    <a href="/spots">Back to main</a>
-</body>
-</html>
+<% layout('layouts/boilerplate') %>
+
+    <div class="row">
+        <h2 class="text-center mt-2">Add New Spot</h2>
+        <div class="col-6 offset-3">
+            <form action="/spots" method="post">
+                <div class="mb-2">
+                    <label for="title" class="form-label mb-1">Title</label>
+                    <input type="text" class="form-control" id="title" name="spot[title]">
+                </div>
+                <div class="mb-2">
+                    <label for="location" class="form-label mb-1">Location</label>
+                    <input type="text" class="form-control" id="location" name="spot[location]">
+                </div>
+                <div class="mb-2">
+                    <label for="image" class="form-label mb-1">Image URL</label>
+                    <input type="text" class="form-control" id="image" name="spot[image]">
+                </div>
+                <div class="mb-2">
+                    <label for="price" class="form-label mb-1">Price</label>
+                    <div class="input-group mb-1">
+                        <span class="input-group-text">$</span>
+                        <input type="number" class="form-control" placeholder="0.00" id="price" name="spot[price]">
+                    </div>
+                    <div class="form-text" id="basic-addon4">Enter only positive number</div>
+                </div>
+                <div class="mb-2">
+                    <label for="description" class="form-label mb-1">Description</label>
+                    <textarea type="text" class="form-control" id="description" name="spot[description]" rows="2"></textarea>
+                </div>
+                <a href="/spots" class="btn btn-danger">Back</a>
+                <button type="submit" class="btn btn-success">Create</button>
+            </form>
+        </div>
+    </div>
