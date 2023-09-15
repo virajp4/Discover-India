@@ -3,31 +3,35 @@
     <div class="row">
         <h2 class="text-center mt-2">Edit Spot</h2>
         <div class="col-6 offset-3">
-            <form action="/spots" method="post">
+            <form action="/spots/<%= spot._id %>?_method=put" method="post" class="validated-form" novalidate>
                 <div class="mb-2">
                     <label for="title" class="form-label mb-1">Title</label>
-                    <input type="text" class="form-control" id="title" name="spot[title]" value="<%= spot.title %>">
+                    <input type="text" class="form-control" id="title" name="spot[title]" value="<%= spot.title %>"
+                        required>
                 </div>
                 <div class="mb-2">
                     <label for="location" class="form-label mb-1">Location</label>
-                    <input type="text" class="form-control" id="location" name="spot[location]" value="<%= spot.location %>">
+                    <input type="text" class="form-control" id="location" name="spot[location]"
+                        value="<%= spot.location %>" required>
                 </div>
                 <div class="mb-2">
                     <label for="image" class="form-label mb-1">Image URL</label>
-                    <input type="text" class="form-control" id="image" name="spot[image]" value="<%= spot.image %>">
+                    <input type="text" class="form-control" id="image" name="spot[image]" value="<%= spot.image %>"
+                        required>
                 </div>
                 <div class="mb-2">
                     <label for="price" class="form-label mb-1">Price</label>
                     <div class="input-group mb-1">
                         <span class="input-group-text">$</span>
-                        <input type="number" class="form-control" placeholder="0.00" id="price" name="spot[price]" value="<%= spot.price %>">
+                        <input type="number" class="form-control" placeholder="0.00" id="price" name="spot[price]"
+                            value="<%= spot.price %>" required>
                     </div>
                     <div class="form-text" id="basic-addon4">Enter only positive number</div>
                 </div>
                 <div class="mb-2">
                     <label for="description" class="form-label mb-1">Description</label>
-                    <textarea type="text" class="form-control" id="description" name="spot[description] value="<%= spot.description %>""
-                        rows="2"></textarea>
+                    <textarea type="text" class="form-control" id="description" name="spot[description]"
+                        value="<%= spot.description %>" rows="2" required></textarea>
                 </div>
                 <a href="/spots" class="btn btn-danger">Back</a>
                 <button type="submit" class="btn btn-success">Update</button>

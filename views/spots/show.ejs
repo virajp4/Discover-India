@@ -14,7 +14,7 @@
                 </ul>
                 <div class="card-body">
                     <a href="/spots/<%= spot._id %>/edit" class="card-link btn btn-info">Edit</a>
-                    <form class="d-inline" action="/spots/<%= spot._id %>/?method=delete" medthod="post">
+                    <form class="d-inline" action="/spots/<%=spot._id%>?_method=DELETE" method="POST">
                         <button class="btn btn-danger">Delete</button>
                     </form>
                 </div>

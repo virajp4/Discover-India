@@ -13,8 +13,7 @@ const spotSchema = new Schema({
         type: String
     },
     price: {
-        type: String,
-        default: 'Free'
+        type: Number
     },
     description: {
         type: String
