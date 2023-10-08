@@ -5,11 +5,12 @@ const methodOverride = require('method-override');
 const engine = require('ejs-mate');
 
 const Joi = require('joi')
-const { spotSchema } = require('./schemas.js');
+const { spotSchema , reviewSchema } = require('./schemas.js');
 
 const ExpressError = require('./utils/ExpressError');
 const catchAsync = require('./utils/catchAsync');
 const Spot = require('./models/spot');
+const Review = require('./models/reviews');
 
 mongoose.connect('mongodb://127.0.0.1:27017/discover-rajkot', {
     useNewUrlParser: true,
@@ -33,6 +34,16 @@ app.use(methodOverride('_method'));
 
 const validateSpot = (req, res, next) => {
     const result = spotSchema.validate(req.body);
+    if (result.error) {
+        const msg = result.error.details.map(el => el.message).join(',');
+        throw new ExpressError(msg, 400);
+    } else {
+        next();
+    }
+};
+
+const validateReview = (req, res, next) => {
+    const result = reviewSchema.validate(req.body);
     if (result.error) {
         const msg = result.error.details.map(el => el.message).join(',');
         throw new ExpressError(msg, 400);
@@ -82,6 +93,15 @@ app.delete('/spots/:id', catchAsync(async (req, res) => {
     const { id } = req.params;
     await Spot.findByIdAndDelete(id);
     res.redirect('/spots');
+}));
+
+app.post('/spots/:id/reviews', validateReview, catchAsync(async (req, res) => {
+    const spot = await Spot.findById(req.params.id);
+    const review = new Review(req.body.review);
+    spot.reviews.push(review);
+    await review.save();
+    await spot.save();
+    res.redirect(`/spots/${spot._id}`);
 }));
 
 app.all("*", (req, res, next) => {
