@@ -73,7 +73,7 @@ app.post('/spots', validateSpot, catchAsync(async (req, res, next) => {
 
 app.get('/spots/:id', catchAsync(async (req, res) => {
     const { id } = req.params;
-    const spot = await Spot.findById(id);
+    const spot = await Spot.findById(id).populate('reviews');
     res.render('spots/show', { spot });
 }));
 
@@ -102,6 +102,12 @@ app.post('/spots/:id/reviews', validateReview, catchAsync(async (req, res) => {
     await review.save();
     await spot.save();
     res.redirect(`/spots/${spot._id}`);
+}));
+
+app.delete('/spots/:id/reviews/:reviewId', catchAsync(async (req, res) => {
+    await Spot.findByIdAndUpdate(req.params.id, { $pull: { reviews: req.params.reviewId } });
+    await Review.findByIdAndDelete(req.params.reviewId);
+    res.redirect(`/spots/${req.params.id}`);
 }));
 
 app.all("*", (req, res, next) => {

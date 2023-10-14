@@ -1,9 +1,11 @@
 <% layout('layouts/boilerplate') %>
 
-    <div class="row">
-        <div class="col-6 offset-3">
+    <div class="row mt-4">
+        <div class="col-6">
             <div class="card">
-                <img src="<%= spot.image %>">
+                <div class="card-img-top d-flex justify-content-center align-items-center">
+                    <img src="<%= spot.image %>" style="max-width: 550px; max-height: 450px;">
+                </div>
                 <div class="card-body">
                     <h5 class="card-title"><%= spot.title %></h5>
                     <p class="card-text"><%= spot.description %></p>
@@ -22,6 +24,8 @@
                     2 days ago.
                 </div>
             </div>
+        </div>
+        <div class="col-6">
             <h2>Leave a Review</h2>
             <form action="/spots/<%= spot._id %>/reviews" method="POST" class="mb-3">
                 <div class="mb-3">
@@ -30,9 +34,25 @@
                 </div>
                 <div class="mb-3">
                     <label for="body" class="form-label">Review</label>
-                    <textarea class="form-control" name="review[body]" id="body" cols="30" rows="10"></textarea>
+                    <textarea class="form-control" name="review[body]" id="body" rows="3"></textarea>
                 </div>
                 <button class="btn btn-success">Submit</button>
             </form>
+            <h2>Reviews</h2>
+            <% for (let review of spot.reviews) { %>
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <%= review.rating %> <%= review.author %>
+                        </h5>
+                        <p class="card-text">
+                            <%= review.body %>
+                        </p>
+                        <form class="d-inline" action="/spots/<%=spot._id%>/reviews/<%=review._id%>?_method=DELETE" method="POST">
+                            <button class="btn btn-danger">Delete</button>
+                        </form>
+                    </div>
+                </div>
+            <% } %>
         </div>
     </div>
