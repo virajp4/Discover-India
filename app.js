@@ -6,16 +6,10 @@ const engine = require('ejs-mate');
 const session = require('express-session');
 const flash = require('connect-flash');
 
-const Joi = require('joi');
-const { spotSchema , reviewSchema } = require('./schemas.js');
-
 const ExpressError = require('./utils/ExpressError');
-const catchAsync = require('./utils/catchAsync');
-const Spot = require('./models/spot');
-const Review = require('./models/reviews');
 
-const spots = require('./routes/spots');
 const reviews = require('./routes/reviews');
+const spots = require('./routes/spots');
 
 mongoose.connect('mongodb://127.0.0.1:27017/discover-rajkot', {
     useNewUrlParser: true,
@@ -49,6 +43,13 @@ const sessionConfig = {
     }
 };
 app.use(session(sessionConfig));
+app.use(flash());
+
+app.use((req,res,next) => {
+    res.locals.success = req.flash('success');
+    res.locals.error = req.flash('error');
+    next();
+});
 
 app.use('/spots', spots);
 app.use('/spots/:id/reviews', reviews);

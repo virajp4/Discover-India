@@ -29,12 +29,17 @@ router.get('/new', (req, res) => {
 router.post('/', validateSpot, catchAsync(async (req, res, next) => {
     const spot = new Spot(req.body.spot);
     await spot.save();
+    req.flash('success', 'Successfully made a new spot!');
     res.redirect(`/spots/${spot._id}`);
 }));
 
 router.get('/:id', catchAsync(async (req, res) => {
     const { id } = req.params;
     const spot = await Spot.findById(id).populate('reviews');
+    if (!spot) {
+        req.flash('error', 'Cannot find that spot!');
+        return res.redirect('/spots');
+    }
     res.render('spots/show', { spot });
 }));
 
