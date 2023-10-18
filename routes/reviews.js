@@ -7,6 +7,7 @@ const ExpressError = require('../utils/ExpressError');
 const { reviewSchema } = require('../schemas.js');
 
 const Spot = require('../models/spot');
+const Review = require('../models/reviews');
 
 const validateReview = (req, res, next) => {
     const result = reviewSchema.validate(req.body);
