@@ -3,6 +3,15 @@ const Review = require('./reviews');
 
 const Schema = mongoose.Schema;
 
+const ImageSchema = new Schema({
+    url: String,
+    filename: String
+});
+
+ImageSchema.virtual('thumbnail').get(function () {
+    return this.url.replace('/upload', '/upload/w_100');
+});
+
 const spotSchema = new Schema({
     title: {
         type: String
@@ -10,12 +19,7 @@ const spotSchema = new Schema({
     location: {
         type: String
     },
-    image: {
-        type: String
-    },
-    price: {
-        type: Number
-    },
+    images: [ImageSchema],
     description: {
         type: String
     },

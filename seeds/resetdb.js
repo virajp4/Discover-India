@@ -25,7 +25,12 @@ const seedDB = async () => {
         const camp = new Spot({
             title: `${sample(descriptors)} ${sample(places)}`,
             price: price,
-            image: 'https://source.unsplash.com/collection/483251',
+            images: [
+                {
+                    filename: 'Discover-Rajkot/w49nqfcksksx8jhwb4wh',
+                    url: 'https://res.cloudinary.com/dyw13siqk/image/upload/v1697712875/Discover-Rajkot/kfpxo1ijpgxwd0mezzbc.jpg'
+                }
+            ],
             description: 'Lorem ipsum dolor sit amet cons',
             location: `${cities[random1000].city}, ${cities[random1000].state}`,
             author: '65301b465d04525fd01924f1'
