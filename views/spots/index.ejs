@@ -1,4 +1,8 @@
 <% layout('layouts/boilerplate') %>
+<link rel="stylesheet" href="/css/app.css">
+
+    <div id="cluster-map"></div>
+
 
     <h1>All Spots</h1>
     <a href="/spots/new">Add spot</a>
@@ -11,12 +15,25 @@
                 </div>
                 <div class="col-md-8">
                     <div class="card-body">
-                        <h3 class="card-title"> <%= spot.title %> </h3>
-                        <p class="card-text"> <%= spot.description %> </p>
-                        <h6 class="card-text"> <%= spot.location %> </h6>
+                        <h3 class="card-title">
+                            <%= spot.title %>
+                        </h3>
+                        <p class="card-text">
+                            <%= spot.description %>
+                        </p>
+                        <h6 class="card-text">
+                            <%= spot.location %>
+                        </h6>
                         <a class="btn btn-primary" href="/spots/<%= spot._id %>"> View </a>
                     </div>
                 </div>
             </div>
         </div>
     <% } %>
+
+    <script>
+        const mapToken = '<%-process.env.MAPBOX_TOKEN%>';
+        const spots = {features: <%- JSON.stringify(spots) %> };
+    </script>
+    
+    <script src="/js/clusterMap.js"></script>

@@ -1,24 +1,24 @@
 <% layout('layouts/boilerplate') %>
 
     <div class="row">
-        <h2 class="text-center mt-2">Add New Spot</h2>
+        <h2 class="text-center mt-3">Add New Spot</h2>
         <div class="col-6 offset-3">
             <form action="/spots" method="post" class="validated-form" enctype="multipart/form-data" novalidate>
-                <div class="mb-2">
+                <div class="mb-3">
                     <label for="title" class="form-label mb-1">Title</label>
                     <input type="text" class="form-control" id="title" name="spot[title]" required>
                 </div>
-                <div class="mb-2">
+                <div class="mb-3">
                     <label for="location" class="form-label mb-1">Location</label>
                     <input type="text" class="form-control" id="location" name="spot[location]" required>
                 </div>
-                <div class="mb-2">
+                <div class="mb-3">
                     <div class="form-file custom-file">
                         <label for="image" class="form-label">Images</label>
                         <input class="form-control" type="file" id="image" name="image" multiple>
                     </div>
                 </div>
-                <div class="mb-2">
+                <div class="mb-3">
                     <label for="description" class="form-label mb-1">Description</label>
                     <textarea type="number" class="form-control" id="description" name="spot[description]" rows="2" required></textarea>
                 </div>
