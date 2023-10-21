@@ -19,8 +19,9 @@ module.exports.createSpot = async (req, res, next) => {
         query: req.body.spot.location,
         limit: 1
     }).send()
-    
+
     const spot = new Spot(req.body.spot);
+    spot.geometry = geoData.body.features[0].geometry;
     spot.images = req.files.map(f => ({ url: f.path, filename: f.filename }));
     spot.author = req.user._id;
     await spot.save();

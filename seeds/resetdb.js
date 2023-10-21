@@ -33,7 +33,11 @@ const seedDB = async () => {
             ],
             description: 'Lorem ipsum dolor sit amet cons',
             location: `${cities[random1000].city}, ${cities[random1000].state}`,
-            author: '65301b465d04525fd01924f1'
+            author: '65301b465d04525fd01924f1',
+            geometry: {
+                type: "Point",
+                coordinates: [-113.1331, 47.0202]
+            }
         })
         await camp.save();
     }

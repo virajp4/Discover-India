@@ -1,4 +1,5 @@
 <% layout('layouts/boilerplate') %>
+
     <link rel="stylesheet" href="/css/stars.css">
 
     <div class="row mt-4">
@@ -10,7 +11,7 @@
                             <div class="carousel-item <%= i === 0 ? 'active' : ''%>">
                                 <img src="<%= img.url %>" class="d-block w-100" alt="">
                             </div>
-                        <% }) %>
+                            <% }) %>
                     </div>
                     <% if(spot.images.length> 1) {%>
                         <button class="carousel-control-prev" type="button" data-bs-target="#spotCarousel"
@@ -23,7 +24,7 @@
                             <span class="carousel-control-next-icon" aria-hidden="true"></span>
                             <span class="visually-hidden">Next</span>
                         </button>
-                    <% } %>
+                        <% } %>
                 </div>
                 <div class="card-body">
                     <h5 class="card-title">
@@ -53,7 +54,10 @@
                         </div>
             </div>
         </div>
+
         <div class="col-6">
+            <div id='map' style='width: 400px; height: 300px;'></div>
+
             <h2>Leave a Review</h2>
             <form action="/spots/<%= spot._id %>/reviews" method="POST" class="mb-3">
                 <fieldset class="starability-basic">
@@ -102,3 +106,10 @@
                 <% } %>
         </div>
     </div>
+
+    <script>
+        const mapToken = '<%-process.env.MAPBOX_TOKEN%>';
+        const spot = JSON.parse('<%- JSON.stringify(spot) %>');
+    </script>
+
+    <script src="/js/showPageMaps.js"></script>
