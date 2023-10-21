@@ -22,8 +22,8 @@ const userRoutes = require('./routes/users')
 const reviewRoutes = require('./routes/reviews');
 const spotRoutes = require('./routes/spots');
 
-// const DB_URL = process.env.DB_URL
-const DB_URL = 'mongodb://localhost:27017/spotsDB'
+const DB_URL = process.env.DB_URL || 'mongodb://localhost:27017/spotsDB'
+const secret = process.env.SECRET
 
 mongoose.connect(DB_URL, {
     useNewUrlParser: true,
@@ -50,7 +50,7 @@ const store = MongoStore.create({
     mongoUrl: DB_URL,
     touchAfter: 24 * 60 * 60,
     crypto: {
-        secret: 'virajp4'
+        secret
     }
 });
 
@@ -61,7 +61,7 @@ store.on('error', function (e) {
 const sessionConfig = {
     store,
     name: 'session',
-    secret: 'virajp4',
+    secret,
     resave: false,
     saveUninitialized: true,
     cookie: {
